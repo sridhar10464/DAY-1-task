@@ -1,0 +1,70 @@
+what is HTTP1.1?
+Developed by Timothy Berners-Lee in 1989 as a communication standard for the World Wide Web, 
+HTTP is a top-level application protocol that exchanges information between a client computer and a local or remote web server. 
+In this process, a client sends a text-based request to a server by calling a method like GET or POST. 
+In response, the server sends a resource like an HTML page back to the client.
+
+What is HTTP 2?
+HTTP/2 began as the SPDY protocol, developed primarily at Google with the intention of reducing web page load latency by using techniques such as compression,
+multiplexing, and prioritization. This protocol served as a template for HTTP/2 when the Hypertext Transfer Protocol working group httpbis of the 
+IETF (Internet Engineering Task Force) put the standard together, culminating in the publication of HTTP/2 in May 2015. 
+From the beginning, many browsers supported this standardization effort, including Chrome, Opera, Internet Explorer, and Safari. 
+Due in part to this browser support, there has been a significant adoption rate of the protocol since 2015, with especially high rates among new sites.
+
+What is the differance between HTTP1.1 vs HTTP2?
+
+                             					HTTP1.1						      
+Multiplexing:
+   HTTP/1.1 loads resources one after the other, so if one resource cannot be loaded, it blocks all the other resources behind it. 	
+   
+Server push:
+   Typically, a server only serves content to a client device if the client asks for it. However, this approach is not always practical for modern webpages,
+which often involve several dozen separate resources that the client must request.
+
+Header compression:
+  Small files load more quickly than large ones. To speed up web performance, both HTTP/1.1 and HTTP/2 compress HTTP messages to make them smaller.
+
+								HTTP2
+
+Multiplexing:
+In contrast, HTTP/2 is able to use a single TCP connection to send multiple streams of data at once so that no one resource blocks any other resource. 
+HTTP/2 does this by splitting data into binary-code messages and numbering these messages so that the client knows which stream each binary message belongs to.
+
+server push:
+HTTP/2 solves this problem by allowing a server to "push" content to a client before the client asks for it. 
+The server also sends a message letting the client know what pushed content to expect – like if Bob had sent Alice a Table of Contents 
+of his novel before sending the whole thing
+
+Header compression:
+
+However, HTTP/2 uses a more advanced compression method called HPACK that eliminates redundant information in HTTP header packets. 
+This eliminates a few bytes from every HTTP packet. Given the volume of HTTP packets involved in loading even a single webpage, 
+those bytes add up quickly, resulting in faster loading.                
+
+
+Key Features of HTTP1.1
+
+1. It was no longer required for each connection to be terminated immediately after every request was served with a response; 
+instead, with the keep-alive header, it was possible to have persistent connections. It allowed multiple requests/responses per TCP connection.
+
+2. The Upgrade header was used to indicate a preference from the client that made it possible to switch to a more preferred protocol if found appropriate by the server.
+
+3. HTTP/1.1 provided support for chunk transfers that allowed streaming of content dynamically as chunks and for additional headers to be sent after the message body. 
+This enhancement was particularly useful in cases where values of a field remained unknown until the content had been produced. 
+For example, when the content had to be digitally signed, it was not possible to do so before the entire content gets generated.
+
+4. Other features that reinforced its stability were introduced such as:
+4.1) pipelining (the second request is sent before the response to the first is adequately served)
+4.2) content negotiation (an exchange between client and server to determine the media type, it also provides the provision to serve different versions of a resource at the same URI)
+4.3) cache control (used to specify caching policies in both requests and responses)
+
+Key Features of HTTP/2:
+
+1. It introduces the concept of a server push where the server anticipates the resources that will be required by the client and pushes them prior 
+to the client making requests. The client retains the authority to deny the server push; however, in most cases, this feature adds a lot of efficiency to the process.
+
+2. Introduces the concept of multiplexing that interleaves the requests and responses without head-of-line blocking and does so over a single TCP connection.
+
+3. It is a binary protocol i.e. only binary commands in the form of 0s and 1s are transmitted over the wire. 
+The binary framing layer divides the message into frames that are segregated based on their type – Data or Header. 
+This feature greatly increases efficiency in terms of security, compression and multiplexing.
